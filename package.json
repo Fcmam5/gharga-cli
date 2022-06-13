@@ -8,6 +8,7 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "test": "jest",
+    "test:watch": "npm run test -- --watch",
     "lint": "eslint --ext .ts",
     "format": "prettier --write .",
     "format:check": "prettier --check src/**/*.ts"

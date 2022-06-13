@@ -1,5 +1,12 @@
 name: "00-Example: Greeting Action"
 on:
+  workflow_call:
+    inputs:
+      day:
+        type: string
+        required: true
+        default: "yes"
+        description: I will say good night if this value is set to "yes"
   workflow_dispatch:
     inputs:
       isNight:
