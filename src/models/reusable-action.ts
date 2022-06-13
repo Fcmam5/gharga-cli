@@ -3,7 +3,6 @@ import { ActionInput, DispatchActionInput } from "./action-input";
 // See: https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#about-yaml-syntax-for-github-actions
 export interface ReusableGHAction {
   name: string;
-  author?: string;
   on: WorkflowCall;
   jobs: unknown;
 }
@@ -17,6 +16,7 @@ export interface WorkflowCall {
 export interface WorkflowRun {
   inputs: ActionInput;
 }
+
 export interface WorkflowDispatch {
   inputs: DispatchActionInput;
 }
@@ -27,3 +27,10 @@ export const WorkflowCallTypes: WorkflowCallType[] = [
   "workflow_dispatch",
   "workflow_run",
 ];
+
+// Custom types
+export interface CustomWorkflowInputs {
+  workflow_call?: ActionInput;
+  workflow_dispatch?: DispatchActionInput;
+  workflow_run?: ActionInput;
+}
