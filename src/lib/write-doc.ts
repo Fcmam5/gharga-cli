@@ -43,8 +43,12 @@ const renderDispatchWorkflow = (dai: DispatchActionInput) => {
         required,
         deprecationMessage,
         default: _default,
+        type,
+        options,
       } = dai[inputName];
-      return `**${inputName}** | ${description} | **${required}** |  *\`${_default}\`* |  ${
+      return `**${inputName}** | ${type || "string"} | ${description || ""}${
+        options ? ` (possible values: ${options.join()})` : ""
+      } | **${required}** |  *\`${_default || ""}\`* |  ${
         deprecationMessage || "-"
       }`;
     })
@@ -52,8 +56,8 @@ const renderDispatchWorkflow = (dai: DispatchActionInput) => {
 
   return `### Dispatch
 
-| Name | Description | Required | default | deprecationMessage
-| -- | -- | -- | -- | --
+| Name | Type | Description | Required | default | deprecationMessage
+| -- | -- |  -- | -- | -- | --
 ${rows}
 `;
 };

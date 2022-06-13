@@ -48,9 +48,9 @@ const expectedMdContent = `# 00-Example: Greeting Action
 
 ### Dispatch
 
-| Name | Description | Required | default | deprecationMessage
-| -- | -- | -- | -- | --
-**isNight** | I will say good night if this value is set to "yes" | **true** |  *\`yes\`* |  -
-**name** | Name to greet | **false** |  *\`Octocat\`* |  -
+| Name | Type | Description | Required | default | deprecationMessage
+| -- | -- |  -- | -- | -- | --
+**isNight** | string | I will say good night if this value is set to "yes" | **true** |  *\`yes\`* |  -
+**name** | string | Name to greet | **false** |  *\`Octocat\`* |  -
 
 `;

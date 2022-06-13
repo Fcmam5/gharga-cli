@@ -9,7 +9,7 @@ export interface DispatchActionInput {
 // See: https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#inputsinput_id
 interface ActionInputType {
   required: boolean;
-  type: inputType;
+  type?: inputType;
   description: string;
   default?: string;
   deprecationMessage?: string;
@@ -20,6 +20,8 @@ interface DispatchInputType {
   description: string;
   default?: string;
   deprecationMessage?: string;
+  type?: inputType;
+  options?: string[];
 }
 
 // See: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onworkflow_dispatchinputs
