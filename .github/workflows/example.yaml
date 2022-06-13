@@ -4,7 +4,7 @@ on:
     inputs:
       isNight:
         required: true
-        default:  'yes'
+        default: "yes"
         description: I will say good night if this value is set to "yes"
       name:
         default: "Octocat"
