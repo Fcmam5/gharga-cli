@@ -1,19 +1,19 @@
-import { DispatchActionInput } from '../models/action-input';
+import { DispatchActionInput } from '../../../models/action-input';
 import {
   CustomWorkflowInputs,
   ReusableGHAction,
   WorkflowCallTypes,
-} from '../models/reusable-action';
+} from '../../../models/reusable-action';
 
-export const extractInputs = (
-  ghWorkflowObj: ReusableGHAction,
-): CustomWorkflowInputs => WorkflowCallTypes.reduce(
-  (acc, wct) => ({
-    ...acc,
-    [wct]: ghWorkflowObj.on[wct]?.inputs,
-  }),
-  {},
-);
+export const extractInputs = (ghWorkflowObj: ReusableGHAction): CustomWorkflowInputs =>
+  // eslint-disable-next-line implicit-arrow-linebreak
+  WorkflowCallTypes.reduce(
+    (acc, wct) => ({
+      ...acc,
+      [wct]: ghWorkflowObj.on[wct]?.inputs,
+    }),
+    {},
+  );
 
 const renderDispatchWorkflow = (dai: DispatchActionInput) => {
   const inputNames = Object.keys(dai);
@@ -29,18 +29,16 @@ const renderDispatchWorkflow = (dai: DispatchActionInput) => {
       } = dai[inputName];
       return `**${inputName}** | ${type || 'string'} | ${description || ''}${
         options ? ` (possible values: ${options.join()})` : ''
-      } | **${required}** |  *\`${defaultVal || ''}\`* |  ${
-        deprecationMessage || '-'
-      }`;
+      } | **${required}** |  *\`${defaultVal || ''}\`* |  ${deprecationMessage || '-'}`;
     })
     .join('\n');
 
   return `### Dispatch
-  
-  | Name | Type | Description | Required | default | deprecationMessage
-  | -- | -- |  -- | -- | -- | --
-  ${rows}
-  `;
+
+| Name | Type | Description | Required | default | deprecationMessage
+| -- | -- |  -- | -- | -- | --
+${rows}
+`;
 };
 
 export const renderTableString = (ghWorkflowObj: ReusableGHAction): string => {

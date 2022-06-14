@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { extractInputs, renderTableString } from '../../src/lib/write-doc';
-import { mockExample00 } from '../mocks';
+
+import {
+  extractInputs,
+  renderTableString,
+} from '../../../../src/lib/triggers/actions/workflow-dispatch';
+import { mockExample00 } from '../../../mocks';
 
 describe('write-doc', () => {
   describe('extract inputs', () => {
     it('should extract inputs from all triggers', () => {
-      expect(extractInputs(mockExample00)).toEqual(
-        expectedExample00OutputsArray,
-      );
+      expect(extractInputs(mockExample00)).toEqual(expectedExample00OutputsArray);
     });
   });
 
