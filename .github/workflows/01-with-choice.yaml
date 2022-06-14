@@ -1,4 +1,4 @@
-name: "01-Example: Another action with choices"
+name: '01-Example: Another action with choices'
 on:
   workflow_dispatch:
     inputs:
@@ -6,12 +6,12 @@ on:
         required: true
         type: choice
         options:
-          - "yes"
-          - "no"
+          - 'yes'
+          - 'no'
         description: I will say good night if this value is set to "yes"
       name:
-        default: "Octocat"
-        description: "Name to greet"
+        default: 'Octocat'
+        description: 'Name to greet'
         required: false
 jobs:
   greet:

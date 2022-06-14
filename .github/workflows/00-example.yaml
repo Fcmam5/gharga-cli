@@ -1,21 +1,21 @@
-name: "00-Example: Greeting Action"
+name: '00-Example: Greeting Action'
 on:
   workflow_call:
     inputs:
       day:
         type: string
         required: true
-        default: "yes"
+        default: 'yes'
         description: I will say good night if this value is set to "yes"
   workflow_dispatch:
     inputs:
       isNight:
         required: true
-        default: "yes"
+        default: 'yes'
         description: I will say good night if this value is set to "yes"
       name:
-        default: "Octocat"
-        description: "Name to greet"
+        default: 'Octocat'
+        description: 'Name to greet'
         required: false
 jobs:
   greet:

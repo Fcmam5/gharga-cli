@@ -1,3 +1,4 @@
-import { Command } from "commander";
+import { Command } from 'commander';
 
 const program = new Command();
+program.help('todo');

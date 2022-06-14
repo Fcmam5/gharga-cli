@@ -1,26 +1,51 @@
-import { DispatchActionInput } from "../models/action-input";
+import { DispatchActionInput } from '../models/action-input';
 import {
   CustomWorkflowInputs,
   ReusableGHAction,
-  WorkflowCall,
   WorkflowCallTypes,
-} from "../models/reusable-action";
+} from '../models/reusable-action';
 
 export const extractInputs = (
-  ghWorkflowObj: ReusableGHAction
-): CustomWorkflowInputs => {
-  return WorkflowCallTypes.reduce(
-    (acc, wct) => ({
-      ...acc,
-      [wct]: ghWorkflowObj.on[wct]?.inputs,
-    }),
-    {}
-  );
+  ghWorkflowObj: ReusableGHAction,
+): CustomWorkflowInputs => WorkflowCallTypes.reduce(
+  (acc, wct) => ({
+    ...acc,
+    [wct]: ghWorkflowObj.on[wct]?.inputs,
+  }),
+  {},
+);
+
+const renderDispatchWorkflow = (dai: DispatchActionInput) => {
+  const inputNames = Object.keys(dai);
+  const rows = inputNames
+    .map((inputName) => {
+      const {
+        description,
+        required,
+        deprecationMessage,
+        default: defaultVal,
+        type,
+        options,
+      } = dai[inputName];
+      return `**${inputName}** | ${type || 'string'} | ${description || ''}${
+        options ? ` (possible values: ${options.join()})` : ''
+      } | **${required}** |  *\`${defaultVal || ''}\`* |  ${
+        deprecationMessage || '-'
+      }`;
+    })
+    .join('\n');
+
+  return `### Dispatch
+  
+  | Name | Type | Description | Required | default | deprecationMessage
+  | -- | -- |  -- | -- | -- | --
+  ${rows}
+  `;
 };
 
 export const renderTableString = (ghWorkflowObj: ReusableGHAction): string => {
   const inputs = extractInputs(ghWorkflowObj);
-  const workflowDispatch = inputs["workflow_dispatch"];
+  const workflowDispatch = inputs.workflow_dispatch;
   let toRender = `# ${ghWorkflowObj.name}
 
 ## Usage
@@ -31,33 +56,5 @@ export const renderTableString = (ghWorkflowObj: ReusableGHAction): string => {
     toRender += renderDispatchWorkflow(workflowDispatch);
   }
 
-  return toRender + "\n";
-};
-
-const renderDispatchWorkflow = (dai: DispatchActionInput) => {
-  const inputNames = Object.keys(dai);
-  const rows = inputNames
-    .map((inputName) => {
-      const {
-        description,
-        required,
-        deprecationMessage,
-        default: _default,
-        type,
-        options,
-      } = dai[inputName];
-      return `**${inputName}** | ${type || "string"} | ${description || ""}${
-        options ? ` (possible values: ${options.join()})` : ""
-      } | **${required}** |  *\`${_default || ""}\`* |  ${
-        deprecationMessage || "-"
-      }`;
-    })
-    .join("\n");
-
-  return `### Dispatch
-
-| Name | Type | Description | Required | default | deprecationMessage
-| -- | -- |  -- | -- | -- | --
-${rows}
-`;
+  return `${toRender}\n`;
 };

@@ -1,18 +1,18 @@
-import { extractInputs, renderTableString } from "../../src/lib/write-doc";
-import { WorkflowCall } from "../../src/models/reusable-action";
-import { mockExample00 } from "../mocks";
+/* eslint-disable @typescript-eslint/no-use-before-define */
+import { extractInputs, renderTableString } from '../../src/lib/write-doc';
+import { mockExample00 } from '../mocks';
 
-describe("write-doc", () => {
-  describe("extract inputs", () => {
-    it("should extract inputs from all triggers", () => {
+describe('write-doc', () => {
+  describe('extract inputs', () => {
+    it('should extract inputs from all triggers', () => {
       expect(extractInputs(mockExample00)).toEqual(
-        expectedExample00OutputsArray
+        expectedExample00OutputsArray,
       );
     });
   });
 
-  describe("renderDispatchWorkflow", () => {
-    it("renders a markdown table", () => {
+  describe('renderDispatchWorkflow', () => {
+    it('renders a markdown table', () => {
       expect(renderTableString(mockExample00)).toEqual(expectedMdContent);
     });
   });
@@ -21,21 +21,21 @@ describe("write-doc", () => {
 const expectedExample00OutputsArray = {
   workflow_call: {
     day: {
-      default: "yes",
+      default: 'yes',
       description: 'I will say good night if this value is set to "yes"',
       required: true,
-      type: "string",
+      type: 'string',
     },
   },
   workflow_dispatch: {
     isNight: {
-      default: "yes",
+      default: 'yes',
       description: 'I will say good night if this value is set to "yes"',
       required: true,
     },
     name: {
-      default: "Octocat",
-      description: "Name to greet",
+      default: 'Octocat',
+      description: 'Name to greet',
       required: false,
     },
   },
